@@ -16,8 +16,7 @@ class ListingService extends BaseService {
     public function getByBrandAndModel($brand, $model){
         return $this->dao->getByBrandAndModel($brand, $model);
     }
-    public function create($data)
-{
+    public function create($data) {
     // Validate year
     if (!isset($data['year']) || !is_numeric($data['year']) || $data['year'] < 1900 || $data['year'] > date("Y") + 1) {
         throw new Exception('Invalid year');
@@ -63,7 +62,8 @@ class ListingService extends BaseService {
 
     // If all good, insert into DB
     return $this->dao->insert($data);
-}
+    
+    }
 
     
 }
