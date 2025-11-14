@@ -22,5 +22,10 @@ Flight::route('PUT /update_listing/@id', function($id){
    $data = Flight::request()->data->getData();
    Flight::json(Flight::listingService()->update($id, $data));
 });
+
+//DELETE
+Flight::route('DELETE /delete_listing/@id', function($id){
+   Flight::json(Flight::listingService()->delete($id));
+});
 ?>
 
