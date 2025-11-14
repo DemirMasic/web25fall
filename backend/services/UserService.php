@@ -34,5 +34,30 @@ class UserService extends BaseService {
     public function getByUsername($username){
         return $this->dao->getByUsername($username);
     }
+
+    public function update($id, $data){
+        if(isset($data['password']) && strlen($data['password']) < 5){
+            throw new Exception('Password must be at least 5 characters long');
+        }
+        if(isset($data['username'])){
+            $existingUser = $this->dao->getByUsername($data['username']);
+            if($existingUser && $existingUser['id'] != $id){
+                throw new Exception('Username already exists');
+            }
+            if(strlen($data['username']) < 3){
+                throw new Exception('Username must be at least 3 characters long');
+            }
+        }
+        if(isset($data['email'])){
+            $existingUser = $this->dao->getByEmail($data['email']);
+            if($existingUser && $existingUser['id'] != $id){
+                throw new Exception('Email already exists');
+            }
+            if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+                throw new Exception('Invalid email format');
+            }
+        }
+        return $this->dao->update($id, $data);
+    }
 }
 ?>
