@@ -22,7 +22,6 @@ Flight::route('GET /user/username/@username', function($username){
 Flight::route('POST /add_user', function(){
    $data = Flight::request()->data->getData();
    Flight::json(Flight::userService()->create($data));
-   // postman vraca True kada dodamo korisinika
 });
 
 // PUT (update)
