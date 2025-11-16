@@ -22,7 +22,12 @@ require_once __DIR__ . '/routes/FavoritesRoutes.php';
 require_once __DIR__ . '/services/MessageService.php';
 Flight::register('messageService', 'MessageService');
 
-require_once __DIR__ . '/routes/MessageService.php';
+require_once __DIR__ . '/routes/MessageRoutes.php';
+
+require_once __DIR__ . '/services/ImageService.php';
+Flight::register('imageService', 'ImageService');
+
+require_once __DIR__ . '/routes/ImageRoutes.php';
 
 
 Flight::start();  //start FlightPHP

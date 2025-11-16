@@ -12,7 +12,7 @@ class ListingDao extends BaseDao {
        $stmt = $this->connection->prepare("SELECT * FROM listing WHERE brand = :brand");
        $stmt->bindParam(':brand', $brand);
        $stmt->execute();
-       return $stmt->fetch();
+       return $stmt->fetchAll();
    }
    public function getByBrandAndModel($brand, $model) {
        $stmt = $this->connection->prepare("SELECT * FROM listing WHERE brand = :brand AND model = :model");
