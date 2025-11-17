@@ -14,5 +14,11 @@ class UserDao extends BaseDao {
        $stmt->execute();
        return $stmt->fetch();
    }
+   public function getByUsername($username) {
+       $stmt = $this->connection->prepare("SELECT * FROM user WHERE username = :username");
+       $stmt->bindParam(':username', $username);
+       $stmt->execute();
+       return $stmt->fetch();
+   }
 }
 ?>
