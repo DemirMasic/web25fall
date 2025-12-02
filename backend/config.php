@@ -32,7 +32,7 @@ class Config
 
 
    public static function JWT_SECRET() {
-       return 'your_key_string';
+       return 'strong_string';
    }
 }
 
