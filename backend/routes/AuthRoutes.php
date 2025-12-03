@@ -17,7 +17,13 @@ Flight::group('/auth', function() {
     *         @OA\MediaType(
     *             mediaType="application/json",
     *             @OA\Schema(
-    *                 required={"password", "email"},
+    *                 required={"username","email", "password"},
+    *                 @OA\Property(
+    *                     property="username",
+    *                     type="string",
+    *                     example="auth_user",
+    *                     description="User name"
+    *                 ),
     *                 @OA\Property(
     *                     property="password",
     *                     type="string",
@@ -46,8 +52,7 @@ Flight::group('/auth', function() {
    Flight::route("POST /register", function () {
        $data = Flight::request()->data->getData();
 
-
-       $response = Flight::auth_service()->register($data);
+       $response = Flight::authService()->register($data);
   
        if ($response['success']) {
            Flight::json([
@@ -81,7 +86,7 @@ Flight::group('/auth', function() {
        $data = Flight::request()->data->getData();
 
 
-       $response = Flight::auth_service()->login($data);
+       $response = Flight::authService()->login($data);
   
        if ($response['success']) {
            Flight::json([

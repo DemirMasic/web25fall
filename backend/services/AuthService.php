@@ -33,13 +33,13 @@ class AuthService extends BaseService {
        $entity['password'] = password_hash($entity['password'], PASSWORD_BCRYPT);
 
 
-       $entity = parent::create($entity);
+       $is_created = parent::create($entity);
 
 
        unset($entity['password']);
 
 
-       return ['success' => true, 'data' => $entity];             
+       return ['success' => $is_created, 'data' => $entity];             
    }
 
 
