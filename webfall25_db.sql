@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2025 at 04:19 PM
+-- Generation Time: Dec 03, 2025 at 08:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,13 @@ CREATE TABLE `favorites` (
   `listing_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `favorites`
+--
+
+INSERT INTO `favorites` (`user_id`, `listing_id`) VALUES
+(1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +50,13 @@ CREATE TABLE `image` (
   `listing_id` int(11) NOT NULL,
   `image_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`id`, `listing_id`, `image_url`) VALUES
+(2, 6, 'backend/assets/images/kodiaq.jpg');
 
 -- --------------------------------------------------------
 
@@ -66,6 +80,16 @@ CREATE TABLE `listing` (
   `drivetrain` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `listing`
+--
+
+INSERT INTO `listing` (`id`, `user_id`, `brand`, `model`, `year`, `mileage`, `power`, `price`, `description`, `created_at`, `gearbox`, `fuel`, `drivetrain`) VALUES
+(1, 1, 'Audi', 'A3', 2012, 160000, 110, 12000, 'odlicno stanje\r\n\r\nvise informacija na 061 123 456', '2025-11-10 16:27:31', 'Manual', 'Diesel', 'Rear-wheel drive'),
+(2, 1, 'Audi', 'Q5', 2018, 90000, 200, 40000, 'Lorem ipsum dolor sit amet', '2025-11-11 11:50:31', 'Automatic', 'Gasoline', 'All-wheel drive'),
+(5, 3, 'BMW', 'X5', 2022, 20000, 300, 60000, 'lorem ipsum', '2025-11-14 17:01:26', 'Automatic', 'Gasoline', 'All-wheel drive'),
+(6, 1, 'Mercedes', 'S-Class', 2013, 300000, 300, 15000, 'Odlično stanje!!, više informacija na 061 123 456', '2025-11-16 23:37:32', 'Manual', 'Gasoline', 'Rear-wheel drive');
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +103,13 @@ CREATE TABLE `message` (
   `content` text NOT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `listing_id`, `user_id`, `content`, `created_at`) VALUES
+(3, 2, 11, 'Is this car still available?', '2025-11-16 23:24:50');
 
 -- --------------------------------------------------------
 
@@ -100,7 +131,12 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `created_at`) VALUES
 (1, 'demir', 'demir.masic@stu.ibu.edu.ba', 'testpassword', '2025-11-05 10:37:55'),
-(3, 'sinan', 'sinan.sakic@stu.ibu.edu.ba', 'testpassword', '2025-11-05 10:38:52');
+(3, 'sinan', 'sinan.sakic@stu.ibu.edu.ba', 'testpassword', '2025-11-05 10:38:52'),
+(4, 'safet', 'safet.prezime@stu.ibu.edu.ba', 'testpassword', '2025-11-11 12:12:52'),
+(6, 'nihad', 'nihad.prezime@stu.ibu.edu.ba', 'testpassword', '2025-11-11 15:50:33'),
+(7, 'ibro', 'ibro.prezime@stu.ibu.edu.ba', 'testpassword', '2025-11-11 16:11:48'),
+(9, 'unique', 'unique.prezime@stu.ibu.edu.ba', 'testpassword', '2025-11-11 17:32:46'),
+(11, 'swaggerUser', 'swagger@stu.ibu.edu.ba', 'testpassword', '2025-11-16 23:20:54');
 
 --
 -- Indexes for dumped tables
@@ -149,25 +185,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `listing`
 --
 ALTER TABLE `listing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -196,7 +232,7 @@ ALTER TABLE `listing`
 -- Constraints for table `message`
 --
 ALTER TABLE `message`
-  ADD CONSTRAINT `fk_message_listing` FOREIGN KEY (`listing_id`) REFERENCES `listing` (`id`),
+  ADD CONSTRAINT `fk_message_listing` FOREIGN KEY (`listing_id`) REFERENCES `listing` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_message_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 
