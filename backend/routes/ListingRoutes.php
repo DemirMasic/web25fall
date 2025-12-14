@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../data/roles.php';
 // =========================
 //          GET
 // =========================
@@ -96,6 +96,8 @@ Flight::route('GET /brandmodel', function(){
  * )
  */
 Flight::route('POST /add_listing', function(){
+   $user = Flight::get('user');
+   Flight::authMiddleware()->authorizeRole(Roles::USER);
    $data = Flight::request()->data->getData();
    Flight::json(Flight::listingService()->create($data));
 });
